@@ -24,7 +24,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
             'bg-slate-200 text-slate-700': variant === 'To Do',
             'bg-cyan-100 text-cyan-800': variant === 'In Progress',
             'bg-purple-100 text-purple-800': variant === 'In Review',
-            'bg-green-100 text-green-800': variant === 'Done',
+            'bg-green-100 text-green-800': variant === 'Completed',
           },
           className
         )}

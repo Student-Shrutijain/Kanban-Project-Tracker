@@ -173,7 +173,7 @@ export const ListView: React.FC<ListViewProps> = ({ tasks }) => {
                     <option value="To Do">To Do</option>
                     <option value="In Progress">In Progress</option>
                     <option value="In Review">In Review</option>
-                    <option value="Done">Done</option>
+                    <option value="Completed">Completed</option>
                   </Select>
                 </div>
                 <div className="flex items-center">

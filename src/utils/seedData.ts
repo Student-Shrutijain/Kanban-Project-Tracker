@@ -11,9 +11,12 @@ export const USERS: User[] = [
 ];
 
 const PRIORITIES: Priority[] = ['Low', 'Medium', 'High', 'Critical'];
-const STATUSES: Status[] = ['To Do', 'In Progress', 'In Review', 'Done'];
-
-const TASKS_COUNT = 550;
+const STATUS_COUNTS: Record<Status, number> = {
+  'To Do': 5,
+  'In Progress': 3,
+  'In Review': 2,
+  'Completed': 3
+};
 
 const getRandomItem = <T>(array: T[]): T => array[Math.floor(Math.random() * array.length)];
 const getRandomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
@@ -22,36 +25,43 @@ export const generateTasks = (): Task[] => {
   const result: Task[] = [];
   const today = new Date();
 
-  for (let i = 0; i < TASKS_COUNT; i++) {
-    // 20% overdue, 10% due today, 70% future
-    const isOverdue = Math.random() < 0.2;
-    const isDueToday = !isOverdue && Math.random() < 0.1;
-    
-    let dueDateObj: string | number | Date;
-    if (isOverdue) {
-      dueDateObj = subDays(today, getRandomInt(1, 15));
-    } else if (isDueToday) {
-      dueDateObj = today;
-    } else {
-      dueDateObj = addDays(today, getRandomInt(1, 30));
-    }
+  let idCounter = 1;
+  const statuses = Object.keys(STATUS_COUNTS) as Status[];
 
-    // 15% without start date
-    const noStartDate = Math.random() < 0.15;
-    let startDateObj = null;
-    if (!noStartDate) {
-      startDateObj = subDays(dueDateObj, getRandomInt(1, 10));
-    }
+  for (const status of statuses) {
+    const count = STATUS_COUNTS[status];
+    for (let i = 0; i < count; i++) {
+      // 20% overdue, 10% due today, 70% future
+      const isOverdue = Math.random() < 0.2;
+      const isDueToday = !isOverdue && Math.random() < 0.1;
+      
+      let dueDateObj: string | number | Date;
+      if (isOverdue) {
+        dueDateObj = subDays(today, getRandomInt(1, 15));
+      } else if (isDueToday) {
+        dueDateObj = today;
+      } else {
+        dueDateObj = addDays(today, getRandomInt(1, 30));
+      }
 
-    result.push({
-      id: `task-${i + 1}`,
-      title: `Project Task ${i + 1} - ${getRandomItem(['Update', 'Fix', 'Implement', 'Review'])} module`,
-      assignee: getRandomItem(USERS).name,
-      priority: getRandomItem(PRIORITIES),
-      status: getRandomItem(STATUSES),
-      startDate: startDateObj ? format(startDateObj, 'yyyy-MM-dd') : null,
-      dueDate: format(dueDateObj, 'yyyy-MM-dd'),
-    });
+      // 15% without start date
+      const noStartDate = Math.random() < 0.15;
+      let startDateObj = null;
+      if (!noStartDate) {
+        startDateObj = subDays(dueDateObj as Date, getRandomInt(1, 10));
+      }
+
+      result.push({
+        id: `task-${idCounter}`,
+        title: `Project Task ${idCounter} - ${getRandomItem(['Update', 'Fix', 'Implement', 'Review'])} module`,
+        assignee: getRandomItem(USERS).name,
+        priority: getRandomItem(PRIORITIES),
+        status: status,
+        startDate: startDateObj ? format(startDateObj, 'yyyy-MM-dd') : null,
+        dueDate: format(dueDateObj as Date, 'yyyy-MM-dd'),
+      });
+      idCounter++;
+    }
   }
 
   return result;

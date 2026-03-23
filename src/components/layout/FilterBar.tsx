@@ -82,7 +82,7 @@ export const FilterBar: React.FC = () => {
           <div className="flex flex-col gap-2">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</span>
             <div className="flex flex-wrap gap-2">
-              {['To Do', 'In Progress', 'In Review', 'Done'].map(s => (
+              {['To Do', 'In Progress', 'In Review', 'Completed'].map(s => (
                 <button
                   key={s}
                   onClick={() => handleToggleFilter('status', s)}

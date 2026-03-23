@@ -12,7 +12,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ tasks }) => {
   const [draggedTaskId, setDraggedTaskId] = useState<string | null>(null);
   const [dragOverColumnId, setDragOverColumnId] = useState<Status | null>(null);
 
-  const COLUMNS: Status[] = ['To Do', 'In Progress', 'In Review', 'Done'];
+  const COLUMNS: Status[] = ['To Do', 'In Progress', 'In Review', 'Completed'];
 
   const handleDragStart = (e: React.DragEvent, taskId: string) => {
     setDraggedTaskId(taskId);
