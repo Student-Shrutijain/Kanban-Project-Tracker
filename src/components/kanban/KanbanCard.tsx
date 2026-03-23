@@ -59,7 +59,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
         <Badge variant={task.priority}>{task.priority}</Badge>
         
         <div className={cn(
-          "flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full border",
+          "flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full border max-w-full w-fit",
           isOverdue && daysOverdue > 7 ? "bg-red-50 text-red-700 border-red-200" :
           isOverdue ? "bg-red-50 text-red-600 border-red-100" :
           isDueToday ? "bg-orange-50 text-orange-600 border-orange-100" :

@@ -139,21 +139,21 @@ export const FilterBar: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2 flex-1 min-w-[200px]">
+          <div className="flex flex-col gap-2 w-full sm:flex-1 min-w-[250px] max-w-md">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Due Date</span>
-             <div className="flex items-center gap-2">
+             <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
                 <input 
                   type="date" 
                   value={filters.dateRange.from || ''}
                   onChange={(e) => handleDateChange('from', e.target.value)}
-                  className="flex-1 h-9 rounded-md border border-slate-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" 
+                  className="flex-1 min-w-[130px] h-9 rounded-md border border-slate-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" 
                 />
                 <span className="text-slate-400">to</span>
                 <input 
                   type="date" 
                   value={filters.dateRange.to || ''}
                   onChange={(e) => handleDateChange('to', e.target.value)}
-                  className="flex-1 h-9 rounded-md border border-slate-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" 
+                  className="flex-1 min-w-[130px] h-9 rounded-md border border-slate-200 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500" 
                 />
              </div>
           </div>
